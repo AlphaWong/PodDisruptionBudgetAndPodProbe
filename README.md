@@ -6,7 +6,9 @@ test pdb will control pod restart based on pod liveness.
 kubecli apply -f .
 # fake remote svc will be create
 # nginx2.default.svc.cluster.local
+# shutdown the remote service
 kubectl scale --replicas=0 deployment/nginx2
+# watch the pod probe based on remote call will restart or not
 watch kubecli get po
 ```
 
