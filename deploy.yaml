@@ -3,31 +3,30 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: python
-  name: python
+    app: nginx
+  name: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: python
+      app: nginx
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: python
+        app: nginx
     spec:
       containers:
-      - image: python
-        name: python
+      - image: nginx
+        name: nginx
         resources: {}
-        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
         livenessProbe:
           exec:
             command:
-            - python
+            - bash
             - -c
-            - "import time,urllib.request,random; time.sleep(random.randrange(10,60));resp=urllib.request.urlopen('http://nginx2.default.svc.cluster.local')"
+            - '$SLEEP_TIME=$(shuf -i 2-40 -n 1);sleep $SLEEP_TIME; curl --max-time 5 -f nginx2.default.svc.cluster.local'
           initialDelaySeconds: 10
-          periodSeconds: 10
+          periodSeconds: 47
 status: {}
