@@ -22,9 +22,11 @@ spec:
         name: nginx
         resources: {}
         livenessProbe:
-          httpGet:
-            path: nginx2.default.svc.cluster.local
-            port: 80
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - '$SLEEP_TIME=$(shuf -i 0-10 -n 1);sleep $SLEEP_TIME; curl --max-time 15 -f nginx2.default.svc.cluster.local'
           initialDelaySeconds: 10
-          periodSeconds: 10
+          periodSeconds: 5
 status: {}
