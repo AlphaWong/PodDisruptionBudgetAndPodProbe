@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: slow-server
+  name: slow-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slow-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: slow-server
+    spec:
+      containers:
+        - image: jhexe2002/slow-server:0.0.1
+          imagePullPolicy: Always
+          name: slow-server

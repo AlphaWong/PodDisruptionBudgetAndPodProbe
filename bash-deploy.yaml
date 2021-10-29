@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bash-nginx
+  name: bash-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bash-nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bash-nginx
+    spec:
+      containers:
+        - image: nginx
+          name: bash-nginx
+          resources: {}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - "SLEEP_TIME=$(shuf -i 2-10 -n 1);sleep $SLEEP_TIME; curl --max-time 10 -f nginx2.default.svc.cluster.local"
+            initialDelaySeconds: 10
+            periodSeconds: 47
+            # it is require after k8s v1.12
+            timeoutSeconds: 90

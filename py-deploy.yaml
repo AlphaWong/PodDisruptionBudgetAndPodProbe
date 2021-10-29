@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: py-nginx
+  name: py-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: py-nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: py-nginx
+    spec:
+      containers:
+        - image: tiangolo/uwsgi-nginx-flask
+          name: py-nginx
+          resources: {}
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - /var/health-check.py
+            initialDelaySeconds: 10
+            periodSeconds: 47
+          volumeMounts:
+            - mountPath: /var/health-check.py
+              name: health-check
+      volumes:
+        - name: health-check
+          hostPath:
+            # directory location on host
+            path: /home/docker/health-check.py
+            # this field is optional
+            type: File
+status: {}
