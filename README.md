@@ -69,6 +69,9 @@ func main() {
 }
 ```
 
+# how to debug liveness
+https://medium.com/@gabytal333/kubernetes-powerful-liveness-probe-with-python-b6dd43adcf9b
+
 # related
 1. https://stackoverflow.com/questions/67276029/are-kubernetes-liveness-probe-failures-voluntary-or-involuntary-disruptions
 1. https://unix.stackexchange.com/questions/94604/does-curl-have-a-timeout/94612
