@@ -7,6 +7,9 @@ minikube start --kubernetes-version=v1.15.12
 ```
 # importance
 Before Kubernetes 1.20, the field `timeoutSeconds` was not respected for exec probes: probes continued running indefinitely, even past their configured deadline, until a result was returned.
+
+# 3 different kind of probes
+1. https://stackoverflow.com/questions/65858309/why-do-i-need-3-different-kind-of-probes-in-kubernetes-startupprobe-readinessp
 ## reference
 1. https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
 
